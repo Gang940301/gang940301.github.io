@@ -132,7 +132,7 @@
   
     // 显示抽取结果  
     const resultItem = document.createElement('div');  
-    resultItem.textContent = `第${document.getElementById('resultList').childElementCount + 1}次：${location}`;  
+    resultItem.textContent = `第${document.getElementById('resultList').childElementCount - 1}次：${location}`;  
     document.getElementById('resultList').appendChild(resultItem);  
   
     // 更新统计  

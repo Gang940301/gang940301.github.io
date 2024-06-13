@@ -1,157 +1,161 @@
-<!DOCTYPE html>  
-<html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<title>随机旅行-山巅旅行团</title>  
-<style>  
-   /* 微信配色 */  
-  :root {  
-    --main-color: #07c160; /* 类似于微信图标的绿色 */  
-    --secondary-color: #f0f0f0; /* 辅助色，比如背景色 */  
-  }  
-  
-  body {  
-    font-family: Arial, sans-serif;  
-    color: #333;  
-    background-color: var(--secondary-color);  
-    margin: 0;  
-    padding: 0;  
-  }  
-  
-  .container {  
-    max-width: 800px;  
-    margin: 20px auto;  
-    padding: 20px;  
-    background-color: #fff;  
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  
-  }  
-  
-  /* 输入和按钮样式 */  
-  .input-item input {  
-    border: 1px solid #ccc;  
-    border-radius: 4px;  
-    padding: 5px;  
-  }  
-  
-  .input-item button {  
-    background-color: var(--main-color);  
-    color: #fff;  
-    border: none;  
-    border-radius: 4px;  
-    padding: 5px 10px;  
-    cursor: pointer;  
-  }  
-  
-  /* 结果列表样式 */  
-  .result-item {  
-    padding: 10px;  
-    border-bottom: 1px solid #eee;  
-    display: grid;  
-    grid-template-columns: 1fr 1fr; /* 定义两列，每列占据相等的空间 */ 
-  }  
-  
-  /* 随机抽取按钮样式 */  
-  .btn-random {  
-    display: block;  
-    width: 100%;  
-    padding: 10px;  
-    background-color: var(--main-color);  
-    color: #fff;  
-    border: none;  
-    border-radius: 4px;  
-    cursor: pointer;  
-    margin-top: 10px;  
-  }  
-</style>  
-</head>  
-<body>  
-  
-<div class="container">  
-  <h1>随机旅行-山巅旅行团</h1>  
-  
-  <div id="input-area">  
-    <h3>输入地点：</h3>  
-    <ul id="input-list"></ul>  
-    <div class="input-item">  
-      <input type="text" id="location-input" placeholder="输入地点名称">  
-      <button onclick="addLocation()">添加</button>  
-    </div>  
-  </div>  
-  
-  <button class="btn-random" onclick="drawRandomLocation()">随机抽取地点</button>
-  
-  <div id="results">  
-    <h3>抽取结果：</h3>  
-    <div id="resultList" class="result-item">
-       <div class="column"></div>  
-  <div class="column"></div> 
-    </div>  
-  </div>  
-  
-  <div id="stats">  
-    <h3>频次统计：</h3>  
-    <p id="statsText"></p>  
-  </div>  
-</div>  
-  
-<script>  
-  let locations = []; // 存储用户输入的地点  
-  let locationCounts = {}; // 存储地点出现次数  
-  
-  // 添加地点到列表和数组中  
-  function addLocation() {  
-    const input = document.getElementById('location-input');  
-    const location = input.value.trim();  
-    if (location && !locations.includes(location)) {  
-      locations.push(location);  
-      locationCounts[location] = 0; // 初始化出现次数为0  
-  
-      // 显示地点到列表中  
-      const listItem = document.createElement('li');  
-      listItem.textContent = location;  
-      document.getElementById('input-list').appendChild(listItem);  
-  
-      // 清空输入框  
-      input.value = '';  
-    }  
-  }  
-  
-  // 随机抽取地点  
-  function drawRandomLocation() {  
-    if (locations.length === 0) {  
-      alert('请先添加一些地点！');  
-      return;  
-    }  
-  
-    const randomIndex = Math.floor(Math.random() * locations.length);  
-    const location = locations[randomIndex];  
-    // 更新地点出现次数  
-    locationCounts[location]++;  
-  
-    // 显示抽取结果  
-    const resultItem = document.createElement('div');  
-    resultItem.textContent = `第${document.getElementById('resultList').childElementCount - 1}次：${location}`;  
-    document.getElementById('resultList').appendChild(resultItem);  
-  
-    // 更新统计  
-    updateStats();  
-  }  
-  
-  // 更新统计信息  
-  function updateStats() {  
-    let maxCount = 0;  
-    let mostVisited = '';  
-    for (let location in locationCounts) {  
-      if (locationCounts[location] > maxCount) {  
-        maxCount = locationCounts[location];  
-        mostVisited = location;  
-      }  
-    }  
-    document.getElementById('statsText').textContent = `出现次数最多的地点是：${mostVisited}，共出现${maxCount}次`;  
-  }  
-</script>  
-  
-</body>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>随机旅行-山巅小队</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        textarea, button {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .location-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .location-item {
+            padding: 5px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+        }
+        .statistics {
+            margin-top: 10px;
+        }
+        .separator {
+            border-top: 2px solid #ccc;
+            margin: 20px 0;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .highlight {
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>随机旅行-山巅小队</h1>
+    <div class="container">
+        <textarea id="locationInput" rows="5" placeholder="一次性输入多个地点，每个地点占据一行"></textarea>
+        <button onclick="addLocations()">添加地点</button>
+        <button onclick="drawLocation()">抽取地点</button>
+        <div class="added-locations">
+            <h3>已添加地点</h3>
+            <div id="locationList" class="location-list"></div>
+        </div>
+        <div class="results">
+            <h3>抽取结果</h3>
+            <div id="drawResults" class="location-list"></div>
+            <div class="separator"></div>
+            <div id="drawCount" class="bold">抽取次数: 0</div>
+            <div id="mostFrequentLocation" class="statistics">出现次数最多的地点: <span class="highlight">无</span></div>
+        </div>
+    </div>
+
+    <script>
+        let locations = [];
+        let drawResults = [];
+        let drawCount = 0;
+
+        function addLocations() {
+            const locationInput = document.getElementById('locationInput');
+            const locationText = locationInput.value.trim();
+            if (locationText) {
+                const newLocations = locationText.split('\n').map(loc => loc.trim()).filter(loc => loc);
+                newLocations.forEach(location => {
+                    locations.push(location);
+                });
+                locationInput.value = '';
+                updateLocationList();
+                alert('地点添加成功: ' + newLocations.join(', '));
+            }
+        }
+
+        function drawLocation() {
+            if (locations.length === 0) {
+                alert('请先添加一些地点！');
+                return;
+            }
+            const randomIndex = Math.floor(Math.random() * locations.length);
+            const drawnLocation = locations[randomIndex];
+            drawResults.push(drawnLocation);
+            drawCount++;
+
+            updateDrawResults();
+            updateStatistics();
+        }
+
+        function updateLocationList() {
+            const locationListDiv = document.getElementById('locationList');
+            locationListDiv.innerHTML = '';
+            locations.forEach((loc, index) => {
+                const locationItem = document.createElement('div');
+                locationItem.classList.add('location-item');
+                locationItem.textContent = `${index + 1}: ${loc}`;
+                locationListDiv.appendChild(locationItem);
+            });
+        }
+
+        function updateDrawResults() {
+            const drawResultsDiv = document.getElementById('drawResults');
+            drawResultsDiv.innerHTML = drawResults.map((result, index) => `<div>${index + 1}: ${result}</div>`).join('');
+            document.getElementById('drawCount').textContent = `抽取次数: ${drawCount}`;
+        }
+
+        function updateStatistics() {
+            const frequency = {};
+            let maxFrequency = 0;
+            let mostFrequentLocation = '';
+
+            drawResults.forEach(location => {
+                frequency[location] = (frequency[location] || 0) + 1;
+                if (frequency[location] > maxFrequency) {
+                    maxFrequency = frequency[location];
+                    mostFrequentLocation = location;
+                }
+            });
+
+            document.getElementById('mostFrequentLocation').innerHTML = `出现次数最多的地点: <span class="highlight">${mostFrequentLocation || '无'}</span>`;
+        }
+    </script>
+</body>
 </html>

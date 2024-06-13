@@ -17,33 +17,41 @@
         }
         h1 {
             color: #4CAF50;
+            margin: 20px 0;
+            font-size: 2.5em;
+            text-align: center;
         }
         .container {
             max-width: 800px;
             width: 100%;
             background-color: #fff;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
         }
         textarea, button {
             width: calc(100% - 22px);
-            padding: 10px;
+            padding: 15px;
             margin-bottom: 10px;
-            border-radius: 5px;
+            border-radius: 10px;
             border: 1px solid #ccc;
+            font-size: 1em;
+        }
+        textarea {
             resize: vertical;
         }
         button {
             background-color: #4CAF50;
             color: white;
             cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
         }
         button:hover {
             background-color: #45a049;
         }
-        .results {
+        .results, .added-locations {
             margin-top: 20px;
         }
         .location-list {
@@ -52,12 +60,11 @@
             gap: 10px;
         }
         .location-item {
-            padding: 5px;
-            background-color: #f2f2f2;
+            padding: 10px;
+            background-color: #f1f8e9;
+            border: 1px solid #c8e6c9;
             border-radius: 5px;
-        }
-        .statistics {
-            margin-top: 10px;
+            text-align: left;
         }
         .separator {
             border-top: 2px solid #ccc;
@@ -68,7 +75,10 @@
         }
         .highlight {
             font-weight: bold;
-            color: red;
+            color: #d32f2f;
+        }
+        .statistics {
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -106,7 +116,6 @@
                 });
                 locationInput.value = '';
                 updateLocationList();
-                alert('地点添加成功: ' + newLocations.join(', '));
             }
         }
 

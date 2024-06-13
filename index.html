@@ -82,11 +82,12 @@
     <div class="container">
         <textarea id="locationInput" rows="5" placeholder="一次性输入多个地点，每个地点占据一行"></textarea>
         <button onclick="addLocations()">添加地点</button>
-        <button onclick="drawLocation()">抽取地点</button>
+        
         <div class="added-locations">
             <h3>已添加地点</h3>
             <div id="locationList" class="location-list"></div>
         </div>
+        <button onclick="drawLocation()">抽取地点</button>
         <div class="results">
             <h3>抽取结果</h3>
             <div id="drawResults" class="location-list"></div>
